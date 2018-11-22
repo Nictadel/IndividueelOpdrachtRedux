@@ -33,7 +33,7 @@ class PDOMessageModel implements MessageModel
 
             if ($message !== null) {
                 $messages[] = ['Id' => intval($message[0]), 'Content' => $message[1], 'Category' => $message[2],
-                    'Upvotes' => $message[3], 'Downvotes' => $message[4]];
+                    'Upvotes' => $message[3], 'Downvotes' => $message[4], 'DateTime' => $message[5]];
             }
         }
 
@@ -49,6 +49,7 @@ class PDOMessageModel implements MessageModel
         $category = null;
         $upvotes = null;
         $downvotes = null;
+        $datetime = null;
 
 
         $statement = $pdo->prepare('SELECT * FROM messages WHERE ID=:id');
@@ -60,12 +61,13 @@ class PDOMessageModel implements MessageModel
         $statement->bindColumn(3, $category, \PDO::PARAM_STR);
         $statement->bindColumn(4, $upvotes, \PDO::PARAM_INT);
         $statement->bindColumn(5, $downvotes, \PDO::PARAM_INT);
+        $statement->bindColumn(6, $datetime, \PDO::PARAM_STR);
 
         $message = null;
 
         if ($statement->fetch(\PDO::FETCH_BOUND)) {
             $message = ['Id' => $id, 'Content' => $content, 'Category' => $category,
-                'Upvotes' => $upvotes, 'Downvotes' => $downvotes];
+                'Upvotes' => $upvotes, 'Downvotes' => $downvotes, 'Datetime' => $datetime];
         }
 
         return $message;
@@ -89,7 +91,7 @@ class PDOMessageModel implements MessageModel
 
             if ($message !== null) {
                 $messages[] = ['Id' => $message[0], 'Content' => $message[1], 'CategoryId' => $message[2],
-                    'Upvotes' => $message[3], 'Downvotes' => $message[4]];
+                    'Upvotes' => $message[3], 'Downvotes' => $message[4], 'DateTime' => $message[5]];
             }
         }
 
@@ -119,7 +121,7 @@ class PDOMessageModel implements MessageModel
 
             if ($message !== null) {
                 $messages[] = ['Id' => $message[0], 'Content' => $message[1], 'Category' => $message[2],
-                    'Upvotes' => $message[3], 'Downvotes' => $message[4]];
+                    'Upvotes' => $message[3], 'Downvotes' => $message[4], 'DateTime' => $message[5]];
             }
         }
 
@@ -148,7 +150,7 @@ class PDOMessageModel implements MessageModel
 
             if ($message !== null) {
                 $messages[] = ['Id' => $message[0], 'Content' => $message[1], 'Category' => $message[2],
-                    'Upvotes' => $message[3], 'Downvotes' => $message[4]];
+                    'Upvotes' => $message[3], 'Downvotes' => $message[4], 'DateTime' => $message[5]];
             }
         }
 

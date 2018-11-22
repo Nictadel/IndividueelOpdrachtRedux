@@ -7,6 +7,7 @@ import Navbar from "./components/navbar";
 import Welcome from "./components/Welcome";
 import SearchMessageList from "./components/SearchMessageList";
 import Login from "./components/Login";
+import Admin from "./components/Admin/Admin";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
                 <Route path='/messages' component={MessagesList} />
                 <Route path="/search" component={SearchMessageList}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/admin" component={Admin}/>
             </Switch>
           </main>
       </div>

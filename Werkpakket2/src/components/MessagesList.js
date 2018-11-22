@@ -15,7 +15,7 @@ class MessagesList extends Component {
             showReactionField: false,
             messageToReact: 0,
             reaction: ''
-        }
+        };
 
         axios.get('http://localhost:8000/messages').then(r => {
             this.props.messages(r.data)
@@ -37,11 +37,7 @@ class MessagesList extends Component {
     changeReactionFieldState(messageId) {
         let newState;
 
-        if (this.state.showReactionField) {
-            newState = false;
-        } else {
-            newState = true;
-        }
+        newState = !this.state.showReactionField;
 
         this.setState({showReactionField: newState, messageToReact: messageId})
     }
@@ -52,13 +48,23 @@ class MessagesList extends Component {
 
     createReaction() {
 
+        //HIER KOMT HET!!
+
+        axios.post('http://localhost:8000/reaction', {
+            "messageId": this.state.messageToReact,
+            "reaction": this.state.reaction.toString()
+        })
+            .then(this.changeReactionFieldState(0));
+
+
+/*
         fetch('http://localhost:8000/reaction', {
             method: 'post',
             body: JSON.stringify({
                 'messageId': this.state.messageToReact,
                 'reaction': this.state.reaction.toString()
             })
-        }).then(this.changeReactionFieldState(0));
+        }).then(this.changeReactionFieldState(0));*/
     }
 
     render() {
@@ -86,7 +92,7 @@ class MessagesList extends Component {
 
 MessagesList.protoTypes = {
     messagesList: PropTypes.object
-}
+};
 
 function mapStateToProps(state) {
     return {

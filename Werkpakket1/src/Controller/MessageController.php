@@ -182,12 +182,13 @@ class MessageController extends AbstractController
     public function deleteMessage(Request $request)
     {
         $statuscode = 200;
-        $reactions[] = null;
+        $messages[] = null;
         $messageId = $request->query->get('messageId');
         if($messageId)
         {
             try {
                 $this->messageModel->deleteMessageById($messageId);
+                $messages = $this->messageModel->getAllMessages();
             } catch (\InvalidArgumentException $exception) {
                 $statuscode = 400;
             } catch (\PDOException $exception) {
@@ -197,7 +198,7 @@ class MessageController extends AbstractController
             $statuscode = 404;
         }
 
-        return new JsonResponse($reactions, $statuscode);
+        return new JsonResponse($messages, $statuscode);
     }
 
 

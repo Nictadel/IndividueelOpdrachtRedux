@@ -43,7 +43,7 @@ class ReactionController extends AbstractController
 
 
     /**
-     * @Route("/reactions", methods={"GET"}, name="getAllMessages")
+     * @Route("/reactions", methods={"GET"}, name="getAllReactions")
      */
     public function getReactions(Request $request)
     {
@@ -82,6 +82,7 @@ class ReactionController extends AbstractController
         {
             try {
                 $this->reactionModel->deleteReactionById($reactionId);
+                $reactions = $this->reactionModel->getAllReactions();
             } catch (\InvalidArgumentException $exception) {
                 $statuscode = 400;
             } catch (\PDOException $exception) {

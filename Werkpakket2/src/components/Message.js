@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import ReactionField from "./ReactionField";
+import dayjs from 'dayjs';
 
 const Message = (props) => {
     return (
@@ -13,6 +14,7 @@ const Message = (props) => {
                     <h6>Inhoud:</h6>
                     <p>{props.message.Content}</p>
                     <p>Categorie: {props.message.Category}</p>
+                    <p>Gepost op: {dayjs(props.message.DateTime).format("DD/MM/YYYY hh:mm")}</p>
                 </div>
                 <div className="mdl-card__actions mdl-card--border">
                     <span className="mdl-cell mdl-cell--6-col">
@@ -48,7 +50,7 @@ const Message = (props) => {
             </div>
         </div>
     );
-}
+};
 
 Message.propTypes = {
     message: PropTypes.object,
@@ -59,6 +61,6 @@ Message.propTypes = {
     downvoteMessage: PropTypes.func,
     updateReaction: PropTypes.func,
     createReaction: PropTypes.func
-}
+};
 
 export default Message;
